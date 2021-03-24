@@ -34,111 +34,113 @@ class _SignUpPage extends State<SignUpPage> {
       fontSize: 24,
     );
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(height: 50),
-        Row(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Log in',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                'Sign Up',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-              widthFactor: 2,
-            ),
-          ],
-        ),
-        SizedBox(height: 25),
-        Image.asset(
-          "assets/images/pic.jpg",
-          height: 100,
-          width: 100,
-        ),
-        SizedBox(height: 50),
-        TextField(
-          decoration: InputDecoration(hintText: 'Email Adress'),
-        ),
-        SizedBox(height: 20),
-        TextField(
-          decoration: InputDecoration(hintText: 'UserName'),
-        ),
-        SizedBox(height: 20),
-        TextField(
-          obscureText: true,
-          decoration: InputDecoration(hintText: 'Password'),
-        ),
-        SizedBox(height: 20),
-        TextField(
-          obscureText: true,
-          decoration: InputDecoration(hintText: 'Repeat Password'),
-        ),
-        SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: ElevatedButton(
-            onPressed: () {},
-            child: Container(
-              alignment: Alignment.center,
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.assignment_turned_in_outlined,
-                    color: Colors.blue,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 50),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Log in',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold
                   ),
-                  Text(
-                    "ٍSign Up",
-                    style: TextStyle(
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 25),
+          Image.asset(
+            "assets/images/pic.jpg",
+            height: 100,
+            width: 100,
+          ),
+          SizedBox(height: 50),
+          TextField(
+            decoration: InputDecoration(hintText: 'Email Adress'),
+          ),
+          SizedBox(height: 20),
+          TextField(
+            decoration: InputDecoration(hintText: 'UserName'),
+          ),
+          SizedBox(height: 20),
+          TextField(
+            obscureText: true,
+            decoration: InputDecoration(hintText: 'Password'),
+          ),
+          SizedBox(height: 20),
+          TextField(
+            obscureText: true,
+            decoration: InputDecoration(hintText: 'Repeat Password'),
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Container(
+                alignment: Alignment.center,
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.assignment_turned_in_outlined,
                       color: Colors.blue,
                     ),
-                  ),
+                    Text(
+                      "ٍSign Up",
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Colors.white,
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0))),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RichText(
+              text: TextSpan(
+                text: 'Already have an Account ',
+                style: TextStyle(color: Colors.grey, fontSize: 18),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: 'LogIn',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black)),
                 ],
               ),
             ),
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                Colors.white,
-              ),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0))),
-            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: RichText(
-            text: TextSpan(
-              text: 'Already have an Account ',
-              style: TextStyle(color: Colors.grey, fontSize: 18),
-              children: <TextSpan>[
-                TextSpan(
-                    text: 'LogIn',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black)),
-              ],
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
