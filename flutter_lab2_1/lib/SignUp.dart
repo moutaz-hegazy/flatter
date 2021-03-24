@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -9,20 +8,15 @@ class SignUpPage extends StatefulWidget {
   _SignUpPage createState() => _SignUpPage();
 }
 
-
 class _SignUpPage extends State<SignUpPage> {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: buildBody(),
-          ),
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: buildBody(),
         ),
       ),
     );
@@ -40,59 +34,61 @@ class _SignUpPage extends State<SignUpPage> {
       fontSize: 24,
     );
 
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(height: 50),
-        Row(children: [
-          Text('Log in ', style:TextStyle(
-            color: Colors.grey,
-            fontWeight: FontWeight.w700,
-            fontSize: 24,
-          ),),
-          Padding(padding: EdgeInsets.fromLTRB(180, 0, 0, 0),
-            child:Text('sign Up' ,style:  _textStyle2,),
-          ),
-        ],
+        Row(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Log in',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                'Sign Up',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              widthFactor: 2,
+            ),
+          ],
         ),
         SizedBox(height: 25),
-        Image.asset("assets/images/pic.jpg",
+        Image.asset(
+          "assets/images/pic.jpg",
           height: 100,
-          width: 100,),
-
+          width: 100,
+        ),
         SizedBox(height: 50),
-
         TextField(
-          decoration: InputDecoration(
-              hintText: 'Email Adress'
-          ),
+          decoration: InputDecoration(hintText: 'Email Adress'),
+        ),
+        SizedBox(height: 20),
+        TextField(
+          decoration: InputDecoration(hintText: 'UserName'),
         ),
         SizedBox(height: 20),
         TextField(
           obscureText: true,
-          decoration: InputDecoration(
-              hintText: 'UserName'
-          ),
+          decoration: InputDecoration(hintText: 'Password'),
         ),
-
         SizedBox(height: 20),
         TextField(
           obscureText: true,
-          decoration: InputDecoration(
-              hintText: 'Password'
-          ),
+          decoration: InputDecoration(hintText: 'Repeat Password'),
         ),
-
-        SizedBox(height: 20),
-        TextField(
-          obscureText: true,
-          decoration: InputDecoration(
-              hintText: 'Repeat Password'
-          ),
-        ),
-
-
         SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -127,24 +123,22 @@ class _SignUpPage extends State<SignUpPage> {
             ),
           ),
         ),
-
-
-
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: RichText(
             text: TextSpan(
               text: 'Already have an Account ',
-              style: TextStyle(color: Colors.grey , fontSize: 18),
+              style: TextStyle(color: Colors.grey, fontSize: 18),
               children: <TextSpan>[
-                TextSpan(text:'LogIn', style: TextStyle(fontWeight: FontWeight.bold ,
-                    color: Colors.black)),
+                TextSpan(
+                    text: 'LogIn',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black)),
               ],
             ),
           ),
         ),
       ],
     );
-
   }
 }
