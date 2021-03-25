@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab2_1/SignUp.dart';
+import 'package:flutter_lab2_1/details_screen.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({Key key}) : super(key: key);
@@ -55,13 +57,19 @@ class _SignInPage extends State<SignIn> {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
+                child: TextButton(
+                  onPressed: (){
+                    print("SignUp");
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>SignUpPage()));
+                  },
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )
               ),
             ],
           ),
@@ -92,7 +100,9 @@ class _SignInPage extends State<SignIn> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_)=>DetailsScreen()));
+              },
               child: Container(
                 alignment: Alignment.center,
                 height: 50,

@@ -1,11 +1,16 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_lab2_1/signin.dart';
 
 class Splash extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    Future.delayed(Duration(seconds: 3), () {
+      // 5s over, navigate to a new page
+      Navigator.push(context,MaterialPageRoute(builder: (_)=>SignIn()));
+    });
     return Scaffold(
         body: Container(
           width: double.infinity,

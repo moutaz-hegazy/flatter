@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab2_1/details_screen.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -44,14 +45,19 @@ class _SignUpPage extends State<SignUpPage> {
             children: [
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  'Log in',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold
+                child: TextButton(
+                  onPressed: (){
+                      Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Log in',
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold
+                    ),
                   ),
-                ),
+                )
               ),
               Align(
                 alignment: Alignment.centerRight,
@@ -94,7 +100,9 @@ class _SignUpPage extends State<SignUpPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,MaterialPageRoute(builder: (_)=>DetailsScreen()));
+              },
               child: Container(
                 alignment: Alignment.center,
                 height: 50,
@@ -126,17 +134,22 @@ class _SignUpPage extends State<SignUpPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: RichText(
-              text: TextSpan(
-                text: 'Already have an Account ',
-                style: TextStyle(color: Colors.grey, fontSize: 18),
-                children: <TextSpan>[
-                  TextSpan(
-                      text: 'LogIn',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Already have an Account', style: TextStyle(color: Colors.grey, fontSize: 18)
+                ),
+                TextButton(onPressed: (){
+                  Navigator.pop(context);
+                },
+                    child: Text(
+                      'LogIn',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black)),
-                ],
-              ),
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    )
+                )
+              ],
             ),
           ),
         ],

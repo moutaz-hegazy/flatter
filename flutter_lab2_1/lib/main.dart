@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab2_1/SignUp.dart';
+import 'package:flutter_lab2_1/details_screen.dart';
 import 'package:flutter_lab2_1/signin.dart';
 import 'splash.dart';
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignUpPage(),
+      home: Splash(),
     );
   }
 }
