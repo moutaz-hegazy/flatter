@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+
+import 'EmployeeData.dart';
+import 'emp_model.dart';
 
 class AddEmployee extends StatefulWidget{
   @override
@@ -14,11 +20,15 @@ class _AddEmpView extends State<AddEmployee>{
   final age = TextEditingController();
   final salary = TextEditingController();
 
-  void postRequest() async{
+  Future<Employee> postRequest() async{
     Dio dio = new Dio();
     Response response = await dio.post("http://dummy.restapiexample.com/api/v1/create",
         data: {"name":"${name.text}","salary":"${salary.text}","age":"${age.text}" });
-    print(response.data);
+    Employee e = new Employee((response.data["data"])["id"].toString() ?? "",
+        (response.data["data"])["name"] ?? "", (response.data["data"])["salary"] ?? "",
+        (response.data["data"])["age"] ?? "", "");
+    print("data -> ${response.data} / emp ->${e.employee_name}");
+    return e;
   }
 
   @override
@@ -56,17 +66,28 @@ class _AddEmpView extends State<AddEmployee>{
               decoration: InputDecoration(hintText: 'Employee Salary')
           ),
           SizedBox(height: 30,),
-          FloatingActionButton.extended(
-              onPressed: (){
-                postRequest();
-                Navigator.pop(context);
-              },
-              label: Text(
-                'ADD',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
+          ScopedModel<EmployeeModel>(
+              model: EmployeeModel.shared,
+              child: new Container(
+                child: new ScopedModelDescendant<EmployeeModel>(
+                builder: (context, child, model) {
+                       return FloatingActionButton.extended(
+                           onPressed:(){
+                             postRequest().then((e){
+                               model.addEmployee(e);
+                             });
+                             Navigator.pop(context);
+                           },
+                            label: Text(
+                              'ADD',
+                              style: TextStyle(
+                                fontSize: 20
+                              ),
+                            ),
+                       );
+                }
+              )
+          )
           )
         ],
       ),

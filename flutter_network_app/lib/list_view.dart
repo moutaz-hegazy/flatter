@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_network_app/addEmp.dart';
+import 'package:flutter_network_app/emp_model.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import 'EmployeeData.dart';
 
@@ -24,13 +26,17 @@ class EmployeeList extends StatefulWidget {
 
 class _MyList extends State<EmployeeList> {
 
-  Future<List<Employee>> employees = null;
+  //Future<List<Employee>> employees = null;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    employees = fetch();
+    fetch().then((value) {
+      EmployeeModel.shared.employees = value;
+      EmployeeModel.shared.notifyListeners();
+
+    });
   }
 
   @override
@@ -44,48 +50,58 @@ class _MyList extends State<EmployeeList> {
         ),
       ),
       body: Center(
-        child: FutureBuilder<List<Employee>>(
-          future: employees,
-          builder: (context,snapShot){
-            if(snapShot.hasError){
-              return ErrorWidget('exception');
-            }
-            List<Employee> emps = snapShot.data ?? [];
-            return ListView.builder(
-                itemCount: emps.length,
-                itemBuilder: (context,index){
-                  Employee employee = emps[index];
-                  return new Padding(
-                      padding:EdgeInsets.all(20),
-                      child: Column(
-                        children: [
-                          Align(
-                            child: Text(
-                              'name : ${employee.employee_name}',
-                              style: TextStyle(
-                                  fontSize: 20
-                              ),
-                            ),
-                            alignment: Alignment.centerLeft,
-                          ),
-                          Align(
-                            child: Text(
-                              'age : ${employee.employee_age}',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color:Colors.grey
-                              ),
-                            ),
-                            alignment: Alignment.centerLeft,
-                          )
-                        ],
-                      ),
-                  );
-                }
-            );
 
-          },
-        ),
+        child: ScopedModel<EmployeeModel>(
+            model: EmployeeModel.shared,
+            child: new Container(
+                child: new ScopedModelDescendant<EmployeeModel>(
+                    builder: (context, child, model) {
+                      return ListView.builder(
+                          itemCount: model.employees.length,
+                          itemBuilder: (context,index){
+                            Employee employee = EmployeeModel.shared.employees[index];
+                            return new Padding(
+                              padding:EdgeInsets.all(20),
+                              child: Column(
+                                children: [
+                                  Align(
+                                    child: Text(
+                                      'name : ${employee.employee_name}',
+                                      style: TextStyle(
+                                          fontSize: 20
+                                      ),
+                                    ),
+                                    alignment: Alignment.centerLeft,
+                                  ),
+                                  Align(
+                                    child: Text(
+                                      'age : ${employee.employee_age}',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color:Colors.grey
+                                      ),
+                                    ),
+                                    alignment: Alignment.centerLeft,
+                                  )
+                                ],
+                              ),
+                            );
+                          }
+                      );
+                    }
+                )
+            )
+        )
+        // child: FutureBuilder<List<Employee>>(
+        //   builder: (context,snapShot){
+        //     if(snapShot.hasError){
+        //       return ErrorWidget('exception');
+        //     }
+        //     List<Employee> emps = snapShot.data ?? [];
+        //     return
+        //
+        //   },
+        //),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
