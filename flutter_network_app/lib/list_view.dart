@@ -56,7 +56,7 @@ class _MyList extends State<EmployeeList> {
             child: new Container(
                 child: new ScopedModelDescendant<EmployeeModel>(
                     builder: (context, child, model) {
-                      return ListView.builder(
+                      return model.employees.isEmpty? CircularProgressIndicator():ListView.builder(
                           itemCount: model.employees.length,
                           itemBuilder: (context,index){
                             Employee employee = EmployeeModel.shared.employees[index];
